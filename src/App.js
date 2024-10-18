@@ -47,6 +47,7 @@ function App() {
           onChange={e => {
             setValorBruto(e.target.value)
             setCounter(counter+1)
+            setCounterTwo(counterTwo+1)
           }}
           className='input-tho'
           type='number'

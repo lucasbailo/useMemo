@@ -1,23 +1,47 @@
 import logo from './logo.svg';
 import './App.css';
+import { useMemo, useState } from 'react';
+
+
+function calculaValorDoImposto (valorBruto) {
+
+  console.log('Calculando valor do imposto')
+
+  if (!valorBruto) {
+    return 0
+  }
+  return parseFloat(valorBruto) * 0.75
+
+}
 
 function App() {
+
+  const [nomeDoImposto, setNomeDoImposto] = useState('')
+  const [valorBruto, setValorBruto] = useState('')
+
+  const valorDoImposto = useMemo(() => calculaValorDoImposto(valorBruto), [valorBruto])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input 
+        placeholder='Nome do imposto'
+        value={nomeDoImposto}
+        onChange={e => setNomeDoImposto(e.target.value)}
+      />
+
+      <input 
+        placeholder='Valor bruto'
+        value={valorBruto}
+        onChange={e => setValorBruto(e.target.value)}
+        type='number'
+      />
+
+    <ul>
+      <li>Nome do Imposto: <strong>{nomeDoImposto}</strong></li>
+      <li>Valor do Imposto: <strong>{valorDoImposto}</strong></li>
+    </ul>
+
     </div>
   );
 }
